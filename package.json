@@ -1,0 +1,32 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bw-pt-water-my-plants3/back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bw-pt-water-my-plants3/back-end/issues"
+  },
+  "homepage": "https://github.com/bw-pt-water-my-plants3/back-end#readme",
+  "devDependencies": {
+    "jest": "^26.5.3",
+    "nodemon": "^2.0.5",
+    "supertest": "^5.0.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^7.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.6",
+    "sqlite3": "^5.0.0"
+  }
+}
