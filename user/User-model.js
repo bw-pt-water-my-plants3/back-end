@@ -26,7 +26,6 @@ async function add(user){
     try{
  const [id] = await db('user').insert(user,'id');
  console.log('added')
-        // return id
     
         return findById(id)
     }catch (err) {

@@ -1,5 +1,3 @@
-// Update with your config settings.
-
 module.exports = {
 
   development: {
@@ -15,15 +13,14 @@ module.exports = {
     },
     pool: {
       afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
+        conn.run('PRAGMA foreign_keys = ON', done);
       },
     },
     useNullAsDefault:true
   },
 
   staging: {
-    client: 'postgresql',
+    client: '',
     connection: {
       database: 'my_db',
       user:     'username',
