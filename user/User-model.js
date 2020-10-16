@@ -4,7 +4,9 @@ module.exports= {
     add,
     find,
     findBy,
-    findById
+    findById,
+    userUpdate,
+    userRemove
 }
 
 function find(){
@@ -31,9 +33,16 @@ async function add(user){
         console.log('error in the catch:', err)
         throw error
     }
-
 }
 
 function findById(id) {
     return db('user').where({id}).first()
+}
+
+function userUpdate(changes,id) {
+    return db('user').where({id}).update(changes)
+}
+
+function userRemove(id) {
+    return db('user').where({id}).del()
 }

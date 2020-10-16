@@ -3,9 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const router = require('express').Router();
 
-const Plants = require('../user/Plants-model')
-
-// const {isValid} = require('../users/users-service.js')
+const Plants = require('../user/User-model')
 
 router.post('/register', async (req,res,next) => {
     const credentials = req.body;
@@ -13,10 +11,8 @@ router.post('/register', async (req,res,next) => {
     try {
         if (credentials) {
             const rounds = 8;
-            // console.log('rounds',rounds)
             const hash = bcryptjs.hashSync(credentials.password,rounds);
             credentials.password = hash;
-            // console.log('authRouter2:',credentials)
 
             const user = await Plants.add(credentials);
             console.log('user in the authrouter reg.:', user)
@@ -58,7 +54,7 @@ function generateToken(user) {
         username:user.username,
         rolename:user.rolename
     }
-    const secret ='IJIwjjijd3887&^@&'
+    const secret = process.env.secret || 'IJIwjjijd3887&^@&'
 
     const options = {
         expiresIn: '1d'
