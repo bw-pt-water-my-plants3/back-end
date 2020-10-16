@@ -13,6 +13,7 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 server.use('/auth', AuthRouter);
+
 server.use('/plant',authenticate, plantRouter);
 
 server.get('/', (req,res) => {
