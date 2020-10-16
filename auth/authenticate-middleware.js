@@ -1,4 +1,4 @@
-const jwtSecret = 'IJIwjjijd3887&^@&'
+const jwtSecret = process.env.secret || 'IJIwjjijd3887&^@&'
 const jwt = require('jsonwebtoken')
 
 
