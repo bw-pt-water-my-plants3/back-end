@@ -8,6 +8,8 @@ exports.up = function(knex) {
         .notNullable()
         tbl.text('password', 128)
         .notNullable()
+        tbl.integer('phoneNumber', 12)
+        .notNullable()
     })
 };
 

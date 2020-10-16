@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const router = require('express').Router();
 
-const Plants = require('../user/Plants-model')
+const Plants = require('../user/User-model')
 
 // const {isValid} = require('../users/users-service.js')
 
