@@ -7,7 +7,7 @@ router.get('/:id', async (req,res) => {
     try{
         const {id} = req.params
 
-        const found = await Users.findById(id)
+        const found = await User.findById(id)
         res.status(200).json({message:"found"})
 
     }catch(err){

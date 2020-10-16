@@ -1,3 +1,4 @@
+
 module.exports = {
 
   development: {
@@ -13,14 +14,14 @@ module.exports = {
     },
     pool: {
       afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
+        conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
       },
     },
     useNullAsDefault:true
   },
 
   staging: {
-    client: '',
+    client: 'postgresql',
     connection: {
       database: 'my_db',
       user:     'username',
