@@ -1,24 +1,18 @@
-const jwtSecret = process.env.secret || 'IJIwjjijd3887&^@&'
-const jwt = require('jsonwebtoken')
-
+const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('../config/secrets.js');
 
 module.exports = (req, res, next) => {
-  const authorization = req.headers?
-  req.headers.authorization.split(' ')[1]:
-  '';
-
-  console.log('authorization',authorization)
-
-  if (authorization){
-    jwt.verify(authorization,jwtSecret,(err,decodedToken) => {
-      if(err){
-        next({apiCode:401, apiMessage:'invalid creds'})
-      }else{
-        req.decodedToken = decodedToken
-        next()
-      }
-    })
-  }else{
-    next({apiCode:400, apimessage:'no creds'})
-  }
+    const { authorization } = req.headers
+    if (authorization) {
+        jwt.verify(authorization, jwtSecret, (err, decodedToken) => {
+            if (err) {
+                res.status(401).json({ message: 'invalid credentials' });
+            } else {
+                req.decodedToken = decodedToken
+                next()
+            }
+        })
+    } else {
+        res.status(400).json({ message: 'no credentials provided' });
+    }
 };

@@ -3,28 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start":"node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bw-pt-water-my-plants3/back-end.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bw-pt-water-my-plants3/back-end/issues"
-  },
-  "homepage": "https://github.com/bw-pt-water-my-plants3/back-end#readme",
-  "devDependencies": {
-    "jest": "^26.5.3",
-    "nodemon": "^2.0.5",
-    "supertest": "^5.0.0"
-  },
-  "dependencies": {
+  "dependencies": { 
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
@@ -34,5 +13,24 @@
     "knex": "^0.21.6",
     "knex-cleaner": "^1.3.1",
     "sqlite3": "^5.0.0"
-  }
+  },
+  "devDependencies": {
+    "jest": "^26.5.3",
+    "nodemon": "^2.0.5",
+    "supertest": "^5.0.0"
+  },
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PTBW-Water-My-Plants/back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PTBW-Water-My-Plants/back-end/issues"
+  },
+  "homepage": "https://github.com/PTBW-Water-My-Plants/back-end#readme"
 }
