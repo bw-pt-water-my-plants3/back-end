@@ -2,7 +2,7 @@ const bcryptjs = require('bcryptjs');
 // const dbConfig = require('../../../db3/node-db3-project/data/db-config');
 const router = require('express').Router();
 const User = require('./User-model')
-const redeploy = true
+const redeploy = false
 
 router.get('/:id', async (req,res) => {
     try{
