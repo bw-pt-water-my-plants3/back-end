@@ -44,8 +44,8 @@ module.exports = {
     client: 'pg',
     connection:process.env.DATABASE_URL,
     pool: {
-      min: 2,
-      max: 20
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);}
     },
 
     migrations: {
