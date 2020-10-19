@@ -10,12 +10,12 @@ module.exports= {
 }
 
 function find(){
-    return db('user as u')
+    return db('User as u')
     .select('u.id', 'u.username')
 }
 
 function findBy(filter){
-    return db('user as u')
+    return db('User as u')
     .select('u.id', 'u.username', 'u.password')
     .where(filter).orderBy('u.id')
 }
@@ -24,7 +24,7 @@ async function add(user){
     console.log('add start')
     console.log("user in plantsmodel add:",user)
     try{
- const [id] = await db('user').insert(user,'id');
+ const [id] = await db('User').insert(user,'id');
  console.log('added')
     
         return findById(id)
@@ -35,13 +35,13 @@ async function add(user){
 }
 
 function findById(id) {
-    return db('user').where({id}).first()
+    return db('User').where({id}).first()
 }
 
 function userUpdate(changes,id) {
-    return db('user').where({id}).update(changes)
+    return db('User').where({id}).update(changes)
 }
 
 function userRemove(id) {
-    return db('user').where({id}).del()
+    return db('User').where({id}).del()
 }
