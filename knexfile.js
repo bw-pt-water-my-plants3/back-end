@@ -20,7 +20,7 @@ module.exports = {
     useNullAsDefault:true
   },
 
-  staging: {
+  testing: {
     client: 'sqlite3',
     connection: {
       database: './data/plant.db3',
@@ -38,6 +38,7 @@ module.exports = {
     seeds: {
       directory: './data/seeds'
     },
+    useNullAsDefault:true 
   },
 
   production: {
