@@ -22,7 +22,26 @@ router.post('/', (req, res) => {
         });
 });
 
-router.put('/:id', (req, res) => {
+// router.put('/:id', (req, res) => {
+//     const { id } = req.params;
+//     const changes = req.body;
+//     Plants.findById(id)
+//         .then((info) => {
+//             if (info) {
+//                 Plants.update(changes, id)
+//                     .then(updatedInfo => {
+//                         res.json(updatedInfo);
+//                     });
+//             } else {
+//                 res.status(404).json({ message: 'could not find plant with given id' });
+//             }
+//         })
+//         .catch((err) => {
+//             res.status(500).json({ message: 'failed to update plant' });
+//         });
+// });
+
+router.patch('/:id', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
     Plants.findById(id)
@@ -41,22 +60,18 @@ router.put('/:id', (req, res) => {
         });
 });
 
-router.patch('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const { id } = req.params;
-    const changes = req.body;
-    Plants.findById(id)
-        .then((info) => {
-            if (info) {
-                Plants.update(changes, id)
-                    .then(updatedInfo => {
-                        res.json(updatedInfo);
-                    });
+    Plants.remove(id)
+        .then((deleted) => {
+            if (deleted) {
+                res.json(deleted)
             } else {
-                res.status(404).json({ message: 'could not find plant with given id' });
+                res.status(404).json({ message: 'cannot find plant with given id' })
             }
         })
         .catch((err) => {
-            res.status(500).json({ message: 'failed to update plant' });
+            res.status(500).json(err);
         });
 });
 

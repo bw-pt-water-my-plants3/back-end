@@ -36,6 +36,8 @@ router.post('/login', (req, res) => {
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
+  const hash = bcrypt.hashSync(changes.password, 10)
+  changes.password = hash;
   Users.findById(id)
     .then((scheme) => {
       if (scheme) {
