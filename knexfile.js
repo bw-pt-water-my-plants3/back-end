@@ -1,3 +1,5 @@
+const pgConnection = process.env.DATABASE_URL || 'postgresql://postgres@localhost/events';
+
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -8,7 +10,7 @@ module.exports = {
     },
     seeds: { directory: './data/seeds' },
   },
-  Production: {
+  production: {
     client: 'pg',
     connection: process.env.DATABASE_URL,
     pool: {
@@ -16,10 +18,10 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './data/migrations'
+      directory: './data/migrations',
     },
     seeds: {
-      directory: './dara/seeds'
+      directory: './data/seeds'
     }
   }
 };
