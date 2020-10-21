@@ -42,5 +42,11 @@ describe('authRouter.js', () => {
                 .send({ username: 'new user1', phone_number: '9138312137', password: 'testPatch' });
             expect(res.status).toBe(200);
         });
-    })
-})
+        it('should return a 404 with an incorrect user id', async () => {
+            const res = await request(server)
+                .patch('/api/auth/4')
+                .send({ username: 'new user1', phone_number: '9138312137', password: 'testPatch' });
+            expect(res.status).toBe(404);
+        });
+    });
+});
