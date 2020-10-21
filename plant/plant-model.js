@@ -16,10 +16,14 @@ function getUserPlants(id) {
   return db("Plant").where('user_id', id);
 }
 
-function add(plant) {
-  return db("Plant")
-    .insert(plant, 'user_id')
-    .then(([id]) => get(id));
+async function add(plant) {
+  try {
+    const [id] = await db("Plant")
+      .insert(plant, 'user_id')
+      return findPlantId(id)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 function edit(id, changes) {
@@ -28,4 +32,8 @@ function edit(id, changes) {
 
 function remove(id) {
   return db("Plant").where("id", id).del();
+}
+
+function findPlantId(id) {
+  return db("Plant").where({id}).first()
 }
