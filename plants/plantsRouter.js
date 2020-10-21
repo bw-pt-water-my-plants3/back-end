@@ -65,7 +65,7 @@ router.delete('/:id', (req, res) => {
     Plants.remove(id)
         .then((deleted) => {
             if (deleted) {
-                res.json(deleted)
+                res.json(deleted);
             } else {
                 res.status(404).json({ message: 'cannot find plant with given id' })
             }
