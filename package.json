@@ -35,5 +35,8 @@
   "bugs": {
     "url": "https://github.com/PTBW-Water-My-Plants/back-end/issues"
   },
-  "homepage": "https://github.com/PTBW-Water-My-Plants/back-end#readme"
+  "homepage": "https://github.com/PTBW-Water-My-Plants/back-end#readme",
+  "jest": {
+    "testEnvironment": "node"
+  }
 }
