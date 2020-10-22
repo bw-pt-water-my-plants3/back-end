@@ -21,16 +21,16 @@ function findBy(filter){
 }
 
 async function add(user){
-    console.log('add start')
-    console.log("user in plantsmodel add:",user)
+    // console.log('add start')
+    // console.log("user in plantsmodel add:",user)
     try{
  const [id] = await db('User').insert(user,'id');
  console.log('added')
     
         return findById(id)
     }catch (err) {
-        console.log('error in the catch:', err)
-        throw error
+        // console.log('error in the catch:', err)
+        throw err
     }
 }
 

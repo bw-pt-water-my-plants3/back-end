@@ -7,15 +7,16 @@ const Plants = require('../user/User-model')
 
 router.post('/register', async (req,res,next) => {
     const credentials = req.body;
-    console.log('authRouther register1:',credentials)
+    // console.log('authRouther register1:',credentials)
     try {
-        if (credentials) {
+        if (credentials.username && credentials.password && credentials.phoneNumber) {
+            // console.log(credentials.username, credentials.password, credentials.phoneNumber)
             const rounds = 8;
             const hash = bcryptjs.hashSync(credentials.password,rounds);
             credentials.password = hash;
 
             const user = await Plants.add(credentials);
-            console.log('user in the authrouter reg.:', user)
+            // console.log('user in the authrouter reg.:', user)
             const token = generateToken(user);
             res.status(200).json({ data: user,token})
         }else{
@@ -28,7 +29,7 @@ router.post('/register', async (req,res,next) => {
 
 router.post('/login', async (req,res,next) => {
     const {username, password} = req.body;
-    console.log('user', req.body)
+    // console.log('user', req.body)
 
     try{
         if(!req.body) {
