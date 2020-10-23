@@ -6,7 +6,7 @@ const db = require('../data/connection');
 const testUser = {"username":"testy","password":"tesy","phoneNumber":"12345678910"}
 const badUser = {"password":"tesy","phoneNumber":"12345678910"}
 const unRegUser = {"username":"Not Registered","password":"tesy","phoneNumber":"12345678910"}
-const validPlant ={"nickname": "test","species": "test","h2oFrequency": "test",}
+const validPlant ={"nickname": "teest","species": "test","h2oFrequency": "test",}
 
 describe('Login and Register ', () => {
     describe('should be in testing',() => {
@@ -32,7 +32,7 @@ describe('Login and Register ', () => {
             expect(res.status).toBe(200) 
         })
         it('sends data missing username', async () => {
-            await db('User').truncate()
+             db('User').truncate()
             const res = await request(server)
             .post('/auth/register')
             .send(badUser)
@@ -42,8 +42,8 @@ describe('Login and Register ', () => {
     describe('Login- POST to /auth/login', () => {
         
         it('sends correct data', async ()=>{
-            await db('User').truncate() 
-            await request(server)
+             db('User').truncate() 
+             request(server)
             .post('/auth/register')
             .send(testUser)
             const res = await request(server)
@@ -52,14 +52,14 @@ describe('Login and Register ', () => {
             expect(res.status).toBe(200) 
         })
         it('login data missing username', async () => {
-            await db('User').truncate()
+             db('User').truncate()
             const res = await request(server)
             .post('/auth/login')
             .send(badUser)
             expect(res.status).toBe(500) 
         })
         it('login unregistered username', async () => {
-            await db('User').truncate()
+             db('User').truncate()
             const res = await request(server)
             .post('/auth/login')
             .send(unRegUser)
