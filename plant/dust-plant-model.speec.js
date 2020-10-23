@@ -1,5 +1,5 @@
 const request = require('supertest');
-const Plants = require('../plant/plant-model')
+const Plants = require('./plant-model')
 const User = require('../user/User-model')
 const db = require('../data/connection');
 
