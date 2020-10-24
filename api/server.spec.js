@@ -1,19 +1,21 @@
 const request = require('supertest');
 const server = require('./server')
-const model = require('../plant/plant-model')
 const db = require('../data/connection');
 
-const testUser = {"username":"testy","password":"tesy","phoneNumber":"12345678910"}
-const badUser = {"password":"tesy","phoneNumber":"12345678910"}
-const unRegUser = {"username":"Not Registered","password":"tesy","phoneNumber":"12345678910"}
-const validPlant ={"nickname": "test","species": "test","h2oFrequency": "test",}
+const testUser = { username: "test", password: "test", phoneNumber: 1234567890 }
 
-describe('Login and Register ', () => {
-    describe('should be in testing',() => {
-        it('should be in testing ENV', () => {
-            expect(process.env.NODE_ENV).toBe('testing')
-        })
-    })
+describe('User Server Working Correctly', () => {
+    describe("send a GET request", () => {
+        it("should return an error if not logged in", async () => {
+            const res = await request(server).get("/plant")
+            expect(res.status).toBe(400)
+        });
+        it("should return json", async () => {
+            const res = await request(server).get("/plant");
+            expect(res.type).toBe("application/json")
+        });
+    });
+
     describe('Get to base URL', () => {
         it('should return welcome message', async () => {
             const res = await request(server).get('/')
@@ -21,49 +23,27 @@ describe('Login and Register ', () => {
             expect(res.text).toBe('{\"message\":"Welcome to the Plants Backend\"}')
         })
     })
-    
-    describe('Register- POST to /auth/register', () => {
 
-        it('sends correct data', async ()=>{
-            await db('User').truncate() 
-            const res = await request(server)
-            .post('/auth/register')
-            .send(testUser)
-            expect(res.status).toBe(200) 
-        })
-        it('sends data missing username', async () => {
-            await db('User').truncate()
-            const res = await request(server)
-            .post('/auth/register')
-            .send(badUser)
-            expect(res.status).toBe(400) 
-        })
-    })
-    describe('Login- POST to /auth/login', () => {
-        
-        it('sends correct data', async ()=>{
-            await db('User').truncate() 
-            await request(server)
-            .post('/auth/register')
-            .send(testUser)
-            const res = await request(server)
-            .post('/auth/login')
-            .send(testUser)
-            expect(res.status).toBe(200) 
-        })
-        it('login data missing username', async () => {
-            await db('User').truncate()
-            const res = await request(server)
-            .post('/auth/login')
-            .send(badUser)
-            expect(res.status).toBe(500) 
-        })
-        it('login unregistered username', async () => {
-            await db('User').truncate()
-            const res = await request(server)
-            .post('/auth/login')
-            .send(unRegUser)
-            expect(res.status).toBe(401) 
-        })
-    })
+    describe("Register a new user", () => {
+        it("should return with a status code of 200", async () => {
+            await db("User").truncate();
+            const res = await request(server).post("/auth/register/").send(testUser);
+            expect(res.status).toBe(200);
+        });
+        it("should return an error on on user with name aleady in database", async () => {
+            const res = await request(server).post("/auth/register/").send(testUser);
+            expect(res.status).toBe(500);
+        });
+    });
+
+    describe("Login user", () => {
+        it("should return a status code of 200", async () => {
+            const res = await request(server).post("/auth/login").send(testUser);
+            expect(res.status).toBe(200);
+        });
+        it("should return with a status code of 401 when given a user not in database", async () => {
+            const res = await request(server).post("/auth/login").send({ username: "notvalid", password: "notvalid", phoneNumber: 1234567890 });
+            expect(res.status).toBe(401);
+        });
+    });
 })
